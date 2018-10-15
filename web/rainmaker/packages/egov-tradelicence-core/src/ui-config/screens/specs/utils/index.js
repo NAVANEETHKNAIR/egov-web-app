@@ -891,7 +891,13 @@ export const validateFields = (objectJsonPath, state, dispatch) => {
           !fields[variable].props.disabled) &&
         !validate(
           "apply",
-          { ...fields[variable], value: get(state.screenConfiguration.preparedFinalObject,fields[variable].jsonPath) },
+          {
+            ...fields[variable],
+            value: get(
+              state.screenConfiguration.preparedFinalObject,
+              fields[variable].jsonPath
+            )
+          },
           dispatch,
           true
         )
@@ -905,7 +911,7 @@ export const validateFields = (objectJsonPath, state, dispatch) => {
 
 export const epochToYmdDate = et => {
   if (!et) return null;
-  if (typeof(et) === "string") return et;
+  if (typeof et === "string") return et;
   var date = new Date(Math.round(Number(et)));
   var formattedDate =
     date.getUTCFullYear() +
@@ -914,4 +920,12 @@ export const epochToYmdDate = et => {
     "-" +
     date.getUTCDate();
   return formattedDate;
+};
+
+export const getBaseURL = () => {
+  if (process.env.REACT_APP_NAME !== "Citizen") {
+    return "/mihy-ui-framework/tradelicence";
+  } else {
+    return "/mihy-ui-framework/tradelicense-citizen";
+  }
 };
