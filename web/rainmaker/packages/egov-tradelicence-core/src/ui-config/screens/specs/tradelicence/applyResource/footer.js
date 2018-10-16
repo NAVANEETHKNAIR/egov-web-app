@@ -15,8 +15,7 @@ import {
   handleScreenConfigurationFieldChange as handleField
 } from "mihy-ui-framework/ui-redux/screen-configuration/actions";
 import { setRoute } from "mihy-ui-framework/ui-redux/app/actions";
-import { createEstimateData } from "../../utils";
-import { validateFields } from "../../utils";
+import { createEstimateData, validateFields, getBaseURL } from "../../utils";
 import { toggleSnackbarAndSetText } from "mihy-ui-framework/ui-redux/app/actions";
 import "./index.css";
 
@@ -117,7 +116,7 @@ export const callBackForNext = async (state, dispatch) => {
     }
   }
   if (activeStep === 1) {
-    let isOwnerShipValid=validateFields(
+    let isOwnerShipValid = validateFields(
       "components.div.children.formwizardSecondStep.children.tradeOwnerDetails.children.cardContent.children.ownershipType.children",
       state,
       dispatch
@@ -166,9 +165,8 @@ export const callBackForNext = async (state, dispatch) => {
     }
     if (isFormValid && isOwnerShipValid) {
       applicationSuccess = await applyTradeLicense(state, dispatch);
-    }
-    else {
-      isFormValid=false
+    } else {
+      isFormValid = false;
     }
   }
   if (activeStep === 2) {
@@ -647,12 +645,12 @@ export const footerReview = (status, applicationNumber, tenantId) => {
               },
               onClickDefination: {
                 action: "page_change",
-                path: `/mihy-ui-framework/tradelicence/pay?applicationNumber=${applicationNumber}&tenantId=${tenantId}&businessService=TL`
+                path: `${getBaseURL()}/pay?applicationNumber=${applicationNumber}&tenantId=${tenantId}&businessService=TL`
               },
               visible: getButtonVisibility(status, "PROCEED TO PAYMENT"),
               roleDefination: {
                 rolePath: "user-info.roles",
-                roles: ["TL_CEMP"]
+                roles: ["TL_CEMP", "CITIZEN"]
               }
             },
             cancelButton: {
