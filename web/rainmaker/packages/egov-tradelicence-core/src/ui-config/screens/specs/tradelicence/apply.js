@@ -187,8 +187,9 @@ const screenConfig = {
       updatePFOforSearchResults(action, state, dispatch, queryValue);
     }
     getMdmsData(action, state, dispatch);
+
+    //For Employee, city dropdown will be disabled and prefilled with employee tenantId.
     const tenantId = localStorage.getItem("tenant-id");
-    console.log(action);
     let props = get(
       action.screenConfig,
       "components.div.children.formwizardFirstStep.children.tradeLocationDetails.children.cardContent.children.tradeDetailsConatiner.children.tradeLocCity.props",
@@ -207,6 +208,8 @@ const screenConfig = {
         tenantId
       )
     );
+
+    //Call and set boundary dropdown data, since there is no handleField for city in employee app
     const queryObj = [{ key: "tenantId", value: tenantId }];
     getBoundaryData(action, state, dispatch, queryObj);
     return action;
