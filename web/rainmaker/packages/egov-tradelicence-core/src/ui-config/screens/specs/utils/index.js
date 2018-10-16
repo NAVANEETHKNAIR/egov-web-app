@@ -762,7 +762,7 @@ export const getDetailsForOwner = async (state, dispatch) => {
       }
     }
   } catch (e) {
-    console.log(e);
+    dispatch(toggleSnackbarAndSetText(true, e.message, "info"));
   }
 };
 
