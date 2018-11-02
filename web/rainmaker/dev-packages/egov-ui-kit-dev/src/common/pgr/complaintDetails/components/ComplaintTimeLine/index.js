@@ -499,7 +499,9 @@ class ComplaintTimeLine extends Component {
     assigneeStatusCount = 0;
     reassignRequestedCount = 0;
     let { status, history, role, timeLine, feedback, rating, filedBy, filedUserMobileNumber, timelineSLAStatus } = this.props;
-
+    if (timeLine && timeLine.length === 1 && timeLine[0].status === "open") {
+      timeLine = [{ status: "pending" }, ...timeLine];
+    }
     let steps = timeLine.map((step, key) => {
       return {
         props: {

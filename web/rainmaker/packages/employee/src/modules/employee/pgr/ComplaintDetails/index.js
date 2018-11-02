@@ -153,6 +153,7 @@ class ComplaintDetails extends Component {
       complaintLoc = { lat: complaint.latitude, lng: complaint.longitude };
     }
     if (complaint) {
+      console.log("complaint is.....", complaint);
       if (role === "ao") {
         if (complaint.complaintStatus.toLowerCase() === "unassigned") {
           btnOneLabel = "ES_REJECT_BUTTON";
@@ -308,7 +309,7 @@ const mapStateToProps = (state, ownProps) => {
   if (selectedComplaint) {
     let userId = selectedComplaint && selectedComplaint.actions && selectedComplaint.actions[selectedComplaint.actions.length - 1].by.split(":")[0];
     let details = {
-      status: selectedComplaint.status,
+      status: selectedComplaint.status || "",
       complaint: mapCompIDToName(complaints.categoriesById, selectedComplaint.serviceCode),
       applicationNo: selectedComplaint.serviceRequestId,
       description: selectedComplaint.description,
@@ -318,7 +319,7 @@ const mapStateToProps = (state, ownProps) => {
       latitude: selectedComplaint.lat,
       longitude: selectedComplaint.long,
       images: fetchImages(selectedComplaint.actions).filter((imageSource) => isImage(imageSource)),
-      complaintStatus: selectedComplaint.status && getLatestStatus(selectedComplaint.status),
+      complaintStatus: selectedComplaint.status ? getLatestStatus(selectedComplaint.status) : "",
       feedback: selectedComplaint.feedback,
       rating: selectedComplaint.rating,
       //filedBy: userId && mapCitizenIdToName(citizenById, userId),
@@ -355,7 +356,7 @@ const mapStateToProps = (state, ownProps) => {
         action.employeeMobileNumber = assignee && getPropertyFromObj(employeeById, assignee, "mobileNumber", "");
       }
     });
-
+    console.log("details are.....", details);
     let transformedComplaint = {
       complaint: details,
       timeLine,
