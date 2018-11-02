@@ -519,7 +519,6 @@ var StatusContent = function StatusContent(_ref2) {
 var DueDate = function DueDate(_ref3) {
   var duedateText = _ref3.duedateText;
 
-  console.log("duedateText is .......", duedateText);
   return duedateText && duedateText.slaStatement && _react2.default.createElement(_translationNode2.default, {
     labelStyle: duedateText.slaStatement.includes("Overdue") ? { color: "#e74c3c" } : { color: "#22b25f" },
     className: "Complaint-details-duedate",
@@ -555,9 +554,7 @@ var ComplaintTimeLine = function (_Component) {
           timelineSLAStatus = _props.timelineSLAStatus;
 
       if (timeLine && timeLine.length === 1 && timeLine[0].status === "open") {
-        // timeLine.push({ status: "pending" });
         timeLine = [{ status: "pending" }].concat((0, _toConsumableArray3.default)(timeLine));
-        console.log("timeline is....", timeLine);
       }
       var steps = timeLine.map(function (step, key) {
         return {
