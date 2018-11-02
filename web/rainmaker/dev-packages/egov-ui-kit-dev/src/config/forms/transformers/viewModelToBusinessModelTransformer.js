@@ -98,7 +98,7 @@ const transformer = (formKey, form = {}, state = {}) => {
           permanentCity: {
             jsonPath: "User.permanentCity",
             value: fields.city.value,
-          }
+          },
         };
       } else if (previousRoute.endsWith("login")) {
         fields = state.form["login"].fields;
@@ -131,6 +131,7 @@ const transformer = (formKey, form = {}, state = {}) => {
       return formData;
     },
     complaint: async () => {
+      console.log("complaint is......");
       const formData = prepareFormData(form);
       const userInfo = localStorage.getItem("user-info");
       let userPhone = null;
@@ -141,7 +142,9 @@ const transformer = (formKey, form = {}, state = {}) => {
 
       try {
         const { latitude, longitude } = form.fields;
-        const tenantId = await getTenantForLatLng(latitude.value, longitude.value);
+        console.log("fomData iss.....", formData);
+        //const tenantId = await getTenantForLatLng(latitude.value, longitude.value);
+        const tenantId = get(formData, "services[0].addressDetail.city");
         formData.services[0].tenantId = tenantId;
       } catch (error) {
         throw new Error(error.message);

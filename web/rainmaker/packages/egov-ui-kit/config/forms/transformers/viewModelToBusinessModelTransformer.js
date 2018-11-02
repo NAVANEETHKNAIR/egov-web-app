@@ -171,6 +171,7 @@ var transformer = function transformer(formKey) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                console.log("complaint is......");
                 formData = (0, _commons.prepareFormData)(form);
                 userInfo = localStorage.getItem("user-info");
                 userPhone = null;
@@ -180,13 +181,12 @@ var transformer = function transformer(formKey) {
                   formData.services[0].phone = userPhone;
                 } catch (error) {}
 
-                _context.prev = 4;
+                _context.prev = 5;
                 _form$fields = form.fields, latitude = _form$fields.latitude, longitude = _form$fields.longitude;
-                _context.next = 8;
-                return (0, _commons.getTenantForLatLng)(latitude.value, longitude.value);
 
-              case 8:
-                tenantId = _context.sent;
+                console.log("fomData iss.....", formData);
+                //const tenantId = await getTenantForLatLng(latitude.value, longitude.value);
+                tenantId = get(formData, "services[0].addressDetail.city");
 
                 formData.services[0].tenantId = tenantId;
                 _context.next = 15;
@@ -194,7 +194,7 @@ var transformer = function transformer(formKey) {
 
               case 12:
                 _context.prev = 12;
-                _context.t0 = _context["catch"](4);
+                _context.t0 = _context["catch"](5);
                 throw new Error(_context.t0.message);
 
               case 15:
@@ -205,7 +205,7 @@ var transformer = function transformer(formKey) {
                 return _context.stop();
             }
           }
-        }, _callee, undefined, [[4, 12]]);
+        }, _callee, undefined, [[5, 12]]);
       }));
 
       return function complaint() {
