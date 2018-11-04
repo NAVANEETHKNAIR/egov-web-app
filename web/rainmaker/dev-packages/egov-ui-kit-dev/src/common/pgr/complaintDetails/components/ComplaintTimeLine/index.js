@@ -506,7 +506,6 @@ const StatusContent = ({ stepData, currentStatus, changeRoute, feedback, rating,
 };
 
 const DueDate = ({ duedateText }) => {
-  console.log("duedateText is .......", duedateText);
   return (
     duedateText &&
     duedateText.slaStatement && (
@@ -528,9 +527,7 @@ class ComplaintTimeLine extends Component {
     reassignRequestedCount = 0;
     let { status, history, role, timeLine, feedback, rating, filedBy, filedUserMobileNumber, timelineSLAStatus } = this.props;
     if (timeLine && timeLine.length === 1 && timeLine[0].status === "open") {
-      // timeLine.push({ status: "pending" });
       timeLine = [{ status: "pending" }, ...timeLine];
-      console.log("timeline is....", timeLine);
     }
     let steps = timeLine.map((step, key) => {
       return {
